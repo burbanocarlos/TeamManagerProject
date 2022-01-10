@@ -1,0 +1,367 @@
+<html>
+<head>
+<title>Team.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Team.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.company</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.apache.commons.lang3.StringUtils</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">javax.swing.plaf.InsetsUIResource</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Team {</span>
+    <span class="s0">private </span><span class="s1">ArrayList&lt;Players&gt; players</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ArrayList&lt;Coaches&gt; coaches</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Team() {</span>
+        <span class="s0">this</span><span class="s1">.players = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Players&gt;()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.coaches = </span><span class="s0">new </span><span class="s1">ArrayList&lt;Coaches&gt;()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">addNewPlayer(<a href="Players.java.html">Players</a> player) {</span>
+
+        <span class="s1">players.add(player)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerFirstName(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newName) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s1">String oldname = oldPLayer.getfName()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setfName(newName)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;The player;s first's name: &quot; </span><span class="s1">+ oldname + </span><span class="s3">&quot; was replaced with &quot; </span><span class="s1">+ oldPLayer.getfName())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerHeight(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s1">String oldname = oldPLayer.getHeight()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setHeight(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  height was replaced with &quot; </span><span class="s1">+ oldPLayer.getHeight())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerWeight(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setWeight(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  weight was replaced with &quot; </span><span class="s1">+ oldPLayer.getWeight())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerPosition(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setPosition(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  position was replaced with &quot; </span><span class="s1">+ oldPLayer.getPosition())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerGamesPlayed(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setGamesPlayed(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  games played  are now &quot; </span><span class="s1">+ oldPLayer.getGamesPlayed())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerGoals(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setGoals(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  goals  are now &quot; </span><span class="s1">+ oldPLayer.getGoals())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerYellowCards(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setYellowCards(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  yellow cards  are now &quot; </span><span class="s1">+ oldPLayer.getYellowCards())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerMinutesPlayed(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setMinutesPlayed(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  minutes played are now &quot; </span><span class="s1">+ oldPLayer.getMinutesPlayed())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerRedCards(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setRedCards(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  red cards  are now &quot; </span><span class="s1">+ oldPLayer.getRedCards())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerAssits(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setAssists(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println( oldPLayer.getfName() + </span><span class="s3">&quot;'s  assits  are now &quot; </span><span class="s1">+ oldPLayer.getAssists())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public boolean </span><span class="s1">updatePlayerLastName(<a href="Players.java.html">Players</a> oldPLayer</span><span class="s0">, </span><span class="s1">String newPlayer) {</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(oldPLayer)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldPLayer.getfName() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldPLayer.getlName() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s1">String oldname = oldPLayer.getlName()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.players.set(position</span><span class="s0">,</span><span class="s1">oldPLayer).setlName(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;The player;s first's name: &quot; </span><span class="s1">+ oldname + </span><span class="s3">&quot; was replaced with &quot; </span><span class="s1">+ oldPLayer.getlName())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private int </span><span class="s1">findPlayer(<a href="Players.java.html">Players</a> player) {</span>
+        <span class="s0">return this</span><span class="s1">.players.indexOf(player)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private int </span><span class="s1">findPlayer(String id) {</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s0">this</span><span class="s1">.players.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <a href="Players.java.html">Players</a> <span class="s1">player = </span><span class="s0">this</span><span class="s1">.players.get(i)</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(player.getId().equals(id))</span>
+                <span class="s0">return </span><span class="s1">i</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">-</span><span class="s2">1</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String queryPlayerID(<a href="Players.java.html">Players</a> player){</span>
+        <span class="s0">if</span><span class="s1">( findPlayer(player) &gt;= </span><span class="s2">0</span><span class="s1">){</span>
+            <span class="s0">return </span><span class="s1">player.getId()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return null;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public <a href="Players.java.html">Players</a> </span><span class="s1">queryPlayerID(String id){</span>
+        <span class="s0">int </span><span class="s1">position = findPlayer(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( position &gt;= </span><span class="s2">0</span><span class="s1">)</span>
+            <span class="s0">return  this</span><span class="s1">.players.get(position)</span><span class="s0">;</span>
+        <span class="s0">return null;</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">public void </span><span class="s1">printRooster(){</span>
+        <span class="s1">String line = </span><span class="s0">new </span><span class="s1">String(</span><span class="s0">new char</span><span class="s1">[</span><span class="s2">110</span><span class="s1">]).replace(</span><span class="s3">'</span><span class="s0">\0</span><span class="s3">'</span><span class="s0">, </span><span class="s3">'-'</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(line)</span><span class="s0">;</span>
+        <span class="s1">System.out.printf(</span><span class="s3">&quot;|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%n&quot;</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;id&quot;</span><span class="s0">, </span><span class="s2">7</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Name&quot;</span><span class="s0">, </span><span class="s2">30</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Position&quot;</span><span class="s0">, </span><span class="s2">12</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Height&quot;</span><span class="s0">, </span><span class="s2">10</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Weight&quot;</span><span class="s0">, </span><span class="s2">10</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;GP&quot;</span><span class="s0">, </span><span class="s2">6</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;MP&quot;</span><span class="s0">, </span><span class="s2">6</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;YC&quot;</span><span class="s0">, </span><span class="s2">4</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;RC&quot;</span><span class="s0">, </span><span class="s2">4</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;G&quot;</span><span class="s0">, </span><span class="s2">4</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;A&quot;</span><span class="s0">, </span><span class="s2">4</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">System.out.println(line)</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">( </span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0 </span><span class="s0">; </span><span class="s1">i &lt; players.size() </span><span class="s0">; </span><span class="s1">i++){</span>
+            <span class="s1">System.out.printf(</span><span class="s3">&quot;|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%n&quot;</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getId()</span><span class="s0">, </span><span class="s2">7</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getfName() + </span><span class="s3">&quot; &quot;</span><span class="s1">+ players.get(i).getlName() </span><span class="s0">, </span><span class="s2">30</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getPosition()</span><span class="s0">, </span><span class="s2">12</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getHeight()</span><span class="s0">, </span><span class="s2">10</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getWeight()</span><span class="s0">, </span><span class="s2">10</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getGamesPlayed()</span><span class="s0">, </span><span class="s2">6</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getMinutesPlayed()</span><span class="s0">, </span><span class="s2">6</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getYellowCards()</span><span class="s0">, </span><span class="s2">4</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getRedCards()</span><span class="s0">, </span><span class="s2">4</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getGoals()</span><span class="s0">, </span><span class="s2">4</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(players.get(i).getAssists()</span><span class="s0">, </span><span class="s2">4</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">System.out.println(line)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">removePlayer(<a href="Players.java.html">Players</a> players){</span>
+        <span class="s0">int </span><span class="s1">foundPosition = findPlayer(players)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( foundPosition &lt; </span><span class="s2">0 </span><span class="s1">){</span>
+            <span class="s1">System.out.println(players.getfName() + </span><span class="s3">&quot; was not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s0">this</span><span class="s1">.players.remove(foundPosition)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(players.getfName() + </span><span class="s3">&quot;, was deleted&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">removeCoach(<a href="Coaches.java.html">Coaches</a> coaches){</span>
+        <span class="s0">int </span><span class="s1">foundPosition = findCoach(coaches)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( foundPosition &lt; </span><span class="s2">0 </span><span class="s1">){</span>
+            <span class="s1">System.out.println(coaches.getFname() + </span><span class="s3">&quot; was not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s0">this</span><span class="s1">.coaches.remove(foundPosition)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(coaches.getFname() + </span><span class="s3">&quot;, was deleted&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+
+<span class="s4">//**********************************************************************//</span>
+<span class="s4">//</span>
+<span class="s4">//                             Coaches</span>
+<span class="s4">//</span>
+<span class="s4">//**********************************************************************//</span>
+
+
+    <span class="s0">public void </span><span class="s1">addNewCoach(<a href="Coaches.java.html">Coaches</a> coach) {</span>
+
+        <span class="s1">coaches.add(coach)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">printCoachInfo(){</span>
+        <span class="s1">String line = </span><span class="s0">new </span><span class="s1">String(</span><span class="s0">new char</span><span class="s1">[</span><span class="s2">98</span><span class="s1">]).replace(</span><span class="s3">'</span><span class="s0">\0</span><span class="s3">'</span><span class="s0">, </span><span class="s3">'-'</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(line)</span><span class="s0">;</span>
+        <span class="s1">System.out.printf(</span><span class="s3">&quot;|%s|%s|%s|%s|%s|%n&quot;</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;id&quot;</span><span class="s0">, </span><span class="s2">7</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Name&quot;</span><span class="s0">, </span><span class="s2">20</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Roll&quot;</span><span class="s0">, </span><span class="s2">20</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Date Of Birth&quot;</span><span class="s0">, </span><span class="s2">15</span><span class="s1">)</span><span class="s0">,</span>
+                <span class="s1">StringUtils.center(</span><span class="s3">&quot;Email&quot;</span><span class="s0">, </span><span class="s2">30</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">System.out.println(line)</span><span class="s0">;</span>
+
+        <span class="s0">for </span><span class="s1">( </span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0 </span><span class="s0">; </span><span class="s1">i &lt; coaches.size()</span><span class="s0">;</span><span class="s1">i++){</span>
+            <span class="s1">System.out.printf(</span><span class="s3">&quot;|%s|%s|%s|%s|%s|%n&quot;</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(coaches.get(i).getId()</span><span class="s0">, </span><span class="s2">7</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(coaches.get(i).getFname() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ coaches.get(i).getLname()</span><span class="s0">, </span><span class="s2">20 </span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(coaches.get(i).getRoll()</span><span class="s0">, </span><span class="s2">20</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(coaches.get(i).getDateOfBirth()</span><span class="s0">, </span><span class="s2">15</span><span class="s1">)</span><span class="s0">,</span>
+                    <span class="s1">StringUtils.center(coaches.get(i).getEmail()</span><span class="s0">, </span><span class="s2">30</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s1">System.out.println(line)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+    <span class="s0">public </span><span class="s1">String queryPlayerID(<a href="Coaches.java.html">Coaches</a> coaches){</span>
+        <span class="s0">if </span><span class="s1">( findCoach(coaches) &gt;=</span><span class="s2">0</span><span class="s1">){</span>
+            <span class="s0">return </span><span class="s1">coaches.getId()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return null;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public <a href="Coaches.java.html">Coaches</a> </span><span class="s1">queryCoachID(String id){</span>
+        <span class="s0">int </span><span class="s1">position = findCoach(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( position &gt;= </span><span class="s2">0</span><span class="s1">){</span>
+            <span class="s0">return this</span><span class="s1">.coaches.get(position)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return null;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private int </span><span class="s1">findCoach(<a href="Coaches.java.html">Coaches</a> coach) {</span>
+        <span class="s0">return this</span><span class="s1">.coaches.indexOf(coach)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">private int </span><span class="s1">findCoach(String id) {</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s0">; </span><span class="s1">i &lt; </span><span class="s0">this</span><span class="s1">.coaches.size()</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <a href="Coaches.java.html">Coaches</a> <span class="s1">coach = </span><span class="s0">this</span><span class="s1">.coaches.get(i)</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(coach.getId().equals(id))</span>
+                <span class="s0">return </span><span class="s1">i</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">-</span><span class="s2">1</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">public boolean </span><span class="s1">updateCoachFname(<a href="Coaches.java.html">Coaches</a> oldCoach</span><span class="s0">, </span><span class="s1">String newCoach) {</span>
+        <span class="s0">int </span><span class="s1">position = findCoach(oldCoach)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldCoach.getFname() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldCoach.getLname() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s1">String oldname = oldCoach.getFname()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.coaches.set(position</span><span class="s0">,</span><span class="s1">oldCoach).setFname(newCoach)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;The coach's first's name: &quot; </span><span class="s1">+ oldname + </span><span class="s3">&quot; was replaced with &quot; </span><span class="s1">+ oldCoach.getFname())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">updateCoachLname(<a href="Coaches.java.html">Coaches</a> oldCoach</span><span class="s0">, </span><span class="s1">String newCoach) {</span>
+        <span class="s0">int </span><span class="s1">position = findCoach(oldCoach)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldCoach.getFname() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldCoach.getLname() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+        <span class="s1">String oldname = oldCoach.getLname()</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.coaches.set(position</span><span class="s0">,</span><span class="s1">oldCoach).setLname(newCoach)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;The coach's last name: &quot; </span><span class="s1">+ oldname + </span><span class="s3">&quot; was replaced with &quot; </span><span class="s1">+ oldCoach.getLname())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">public boolean </span><span class="s1">updateCoachRoll(<a href="Coaches.java.html">Coaches</a> oldCoach</span><span class="s0">, </span><span class="s1">String newCoach) {</span>
+        <span class="s0">int </span><span class="s1">position = findCoach(oldCoach)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(position &lt; </span><span class="s2">0</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(oldCoach.getFname() + </span><span class="s3">&quot; &quot; </span><span class="s1">+ oldCoach.getLname() + </span><span class="s3">&quot; was not found with that ID , double check the ID&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return false;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.coaches.set(position</span><span class="s0">,</span><span class="s1">oldCoach).setRoll(newCoach)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s3">&quot;The coach's : &quot; </span><span class="s1">+ oldCoach.getFname() + </span><span class="s3">&quot; roll was replaced with &quot; </span><span class="s1">+ oldCoach.getRoll())</span><span class="s0">;</span>
+        <span class="s0">return true;</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>

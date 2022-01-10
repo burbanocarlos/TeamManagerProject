@@ -1,0 +1,643 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.company</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.io.File</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.io.FileNotFoundException</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Scanner</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Main {</span>
+
+    <span class="s0">private static </span><span class="s1">Scanner scanner = </span><span class="s0">new </span><span class="s1">Scanner((System.in))</span><span class="s0">;</span>
+    <span class="s0">private static <a href="Team.java.html">Team</a> </span><span class="s1">team = </span><span class="s0">new <a href="Team.java.html">Team</a></span><span class="s1">()</span><span class="s0">;</span>
+
+
+    <span class="s0">public static void </span><span class="s1">main(String[] args) </span><span class="s0">throws </span><span class="s1">FileNotFoundException {</span>
+
+        <span class="s0">boolean </span><span class="s1">quit = </span><span class="s0">false;</span>
+
+        <a href="IdGenerator.java.html">IdGenerator</a><span class="s1">.generator()</span><span class="s0">;</span>
+        <span class="s1">addPlayersFromFile()</span><span class="s0">;</span>
+        <span class="s1">addCoachesFromFile()</span><span class="s0">;</span>
+        <span class="s1">menu()</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">printActions(){</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">Available actions:</span><span class="s0">\n</span><span class="s2">press&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;0 - to shutdown</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;1 - to print rooster</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;2 - to add a new player</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;3 - to update an existing player</span><span class="s0">\n</span><span class="s2">&quot; </span><span class="s1">+</span>
+                <span class="s2">&quot;4 - to remove an existing player</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;5 - to print Coach staff </span><span class="s0">\n</span><span class="s2">&quot; </span><span class="s1">+</span>
+                <span class="s2">&quot;6 - to add new coach</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;7 - to update an existing coach</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;8 - to remove existing coach</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;9 - to display options&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Choose you action: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">menu(){</span>
+        <span class="s0">boolean </span><span class="s1">quit = </span><span class="s0">false;</span>
+        <span class="s1">printActions()</span><span class="s0">;</span>
+
+        <span class="s0">while </span><span class="s1">(!quit) {</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">Enter action: ( 8 to show available actions)&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">int </span><span class="s1">action = scanner.nextInt()</span><span class="s0">;</span>
+            <span class="s1">scanner.nextLine()</span><span class="s0">;</span>
+
+            <span class="s0">switch </span><span class="s1">((action)) {</span>
+                <span class="s0">case </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">System.out.println(</span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">Shutting down&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">1</span><span class="s1">:</span>
+                    <span class="s1">team.printRooster()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">2</span><span class="s1">:</span>
+                    <span class="s1">addNewPLayer()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">3</span><span class="s1">:</span>
+                    <span class="s1">updatePlayer()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">4</span><span class="s1">:</span>
+                    <span class="s1">removePLayer()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">5</span><span class="s1">:</span>
+                    <span class="s1">team.printCoachInfo()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">6</span><span class="s1">:</span>
+                    <span class="s1">addNewCoach()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">7</span><span class="s1">:</span>
+                    <span class="s1">updateCoach()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">8</span><span class="s1">:</span>
+                    <span class="s1">removeCoach()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">9</span><span class="s1">:</span>
+                    <span class="s1">printActions()</span><span class="s0">;</span>
+                    <span class="s0">break;</span>
+
+
+            <span class="s1">}</span>
+
+
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">private static void </span><span class="s1">updatePlayer(){</span>
+
+        <span class="s0">boolean </span><span class="s1">quit = </span><span class="s0">false;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">Available actions:</span><span class="s0">\n</span><span class="s2">press&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;0 - to go back to main menu</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;1 - to update player's first name</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;2 - to update player's last name</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;3 - tto update player's height</span><span class="s0">\n</span><span class="s2">&quot; </span><span class="s1">+</span>
+                <span class="s2">&quot;4 - to to update player's weight</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;5 - to to update player's position</span><span class="s0">\n</span><span class="s2">&quot; </span><span class="s1">+</span>
+                <span class="s2">&quot;6 - to to update player's games played</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;7 - to to update player's minutes played</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;8 - to to update player's yellow cards</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;9 - to to update player's red cards</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;10 - to to update player's goal's</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;11 - to to update player's red assist's</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Choose you action: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s0">while </span><span class="s1">(!quit){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">Update Player Menu Enter action: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">int </span><span class="s1">action = scanner.nextInt()</span><span class="s0">;</span>
+            <span class="s1">scanner.nextLine()</span><span class="s0">;</span>
+
+            <span class="s0">switch </span><span class="s1">((action)) {</span>
+                <span class="s0">case </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">menu()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+                <span class="s0">case </span><span class="s3">1</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerFirstName()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">2</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerLastName()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">3</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerHeight()</span><span class="s0">;</span>
+                    <span class="s1">quit =</span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">4</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerWeight()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">5</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerPosition()</span><span class="s0">;</span>
+                    <span class="s1">quit =</span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">6</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerGamesPlayed()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">7</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerMinutesPlayed()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">8 </span><span class="s1">:</span>
+                    <span class="s1">updatePlayerYellowCards()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">9 </span><span class="s1">:</span>
+                    <span class="s1">updatePlayerRedCards()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">10 </span><span class="s1">:</span>
+                    <span class="s1">updatePlayerGoals()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">11</span><span class="s1">:</span>
+                    <span class="s1">updatePlayerAssits()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerFirstName (){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's New first name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newName = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerFirstName(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newName)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerLastName(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's New last name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newName = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerLastName(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newName)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerHeight(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's New Height: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newHeight = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerLastName(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newHeight)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerWeight(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's New weight: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newHeight = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerWeight(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newHeight)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerPosition(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's New position: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newPosition = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerPosition(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newPosition)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerGamesPlayed(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's games played: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newData = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerGamesPlayed(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newData)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerMinutesPlayed(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's Minutes played: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newData = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerMinutesPlayed(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newData)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerYellowCards(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's yellow cards: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newData = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerYellowCards(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newData)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerRedCards(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's red cards: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newData = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerRedCards(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newData)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerGoals(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's Goals: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newData = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerGoals(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newData)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updatePlayerAssits(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingPlayerRecord =team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingPlayerRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Player not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Player's Assits: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newData = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updatePlayerAssits(existingPlayerRecord</span><span class="s0">, </span><span class="s1">newData)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">addNewPLayer(){</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter player's First name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String fName = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter player's last name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String lName = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter player's height: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String height = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter player's weight: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String weight = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter player's position: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String position = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter player's date of birth (mm/dd/yyyy) : &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String dateOfBirth = scanner.nextLine()</span><span class="s0">;</span>
+
+        <a href="Players.java.html">Players</a> <span class="s1">newPlayer = <a href="Players.java.html">Players</a>.createPlayer(fName</span><span class="s0">,</span><span class="s1">lName</span><span class="s0">,</span><span class="s1">height</span><span class="s0">,</span><span class="s1">weight</span><span class="s0">,</span><span class="s1">position</span><span class="s0">,</span><span class="s1">dateOfBirth)</span><span class="s0">;</span>
+        <span class="s1">team.addNewPlayer(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(fName + </span><span class="s2">&quot; &quot; </span><span class="s1">+ lName + </span><span class="s2">&quot; has been added.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+
+
+    <span class="s0">public static void </span><span class="s1">addPlayersFromFile() </span><span class="s0">throws </span><span class="s1">FileNotFoundException {</span>
+
+        <span class="s1">Scanner file = </span><span class="s0">new </span><span class="s1">Scanner(</span><span class="s0">new </span><span class="s1">File(</span><span class="s2">&quot;team.txt&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+        <span class="s0">while </span><span class="s1">(file.hasNextLine()){</span>
+            <span class="s1">String fname = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String lname = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String height = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String weight = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String position = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String dateOfBirth = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String gamesPlayed = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String minutesPlayed = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String yellowCards = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String redCards = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String goals = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String assists = file.nextLine()</span><span class="s0">;</span>
+            <a href="Players.java.html">Players</a> <span class="s1">newPlayer = <a href="Players.java.html">Players</a>.createPlayer(fname</span><span class="s0">,</span><span class="s1">lname</span><span class="s0">,</span><span class="s1">height</span><span class="s0">,</span><span class="s1">weight</span><span class="s0">,</span><span class="s1">position</span><span class="s0">,</span><span class="s1">dateOfBirth</span><span class="s0">,</span><span class="s1">gamesPlayed</span><span class="s0">,</span><span class="s1">minutesPlayed</span><span class="s0">,</span><span class="s1">yellowCards</span><span class="s0">,</span><span class="s1">redCards</span><span class="s0">,</span><span class="s1">goals</span><span class="s0">,</span><span class="s1">assists)</span><span class="s0">;</span>
+            <span class="s1">team.addNewPlayer(newPlayer)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">removePLayer(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter existing Player ID : &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Players.java.html">Players</a> <span class="s1">existingContactRecord = team.queryPlayerID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(existingContactRecord == </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Contact not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+        <span class="s0">if </span><span class="s1">(team.removePlayer(existingContactRecord)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully deleted&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error deleting record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">removeCoach(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter existing Coach ID : &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Coaches.java.html">Coaches</a> <span class="s1">existingContactRecord = team.queryCoachID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(existingContactRecord == </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Contact not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+        <span class="s0">if </span><span class="s1">(team.removeCoach(existingContactRecord)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully deleted&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error deleting record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s4">//**********************************************************************//</span>
+<span class="s4">//</span>
+<span class="s4">//                             Coaches</span>
+<span class="s4">//</span>
+<span class="s4">//**********************************************************************//</span>
+
+    <span class="s0">public static void </span><span class="s1">addCoachesFromFile() </span><span class="s0">throws </span><span class="s1">FileNotFoundException {</span>
+        <span class="s1">Scanner file = </span><span class="s0">new </span><span class="s1">Scanner(</span><span class="s0">new </span><span class="s1">File(</span><span class="s2">&quot;coaches.txt&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+        <span class="s0">while </span><span class="s1">( file.hasNextLine()){</span>
+            <span class="s1">String fname = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String lname = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String roll = file.nextLine()</span><span class="s0">;</span>
+            <span class="s1">String dateOfBirth = file.nextLine()</span><span class="s0">;</span>
+            <a href="Coaches.java.html">Coaches</a> <span class="s1">newCoach = <a href="Coaches.java.html">Coaches</a>.newCoach(fname</span><span class="s0">,</span><span class="s1">lname</span><span class="s0">,</span><span class="s1">dateOfBirth</span><span class="s0">,</span><span class="s1">roll)</span><span class="s0">;</span>
+            <span class="s1">team.addNewCoach(newCoach)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">addNewCoach(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter First name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String fName = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter last name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String lName = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter date of birth (mm/dd/yyyy) : &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String dateOfBirth = scanner.nextLine()</span><span class="s0">;</span>
+        <span class="s1">System.out.printf(</span><span class="s2">&quot;Enter Roll&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String roll = scanner.nextLine()</span><span class="s0">;</span>
+
+        <a href="Coaches.java.html">Coaches</a> <span class="s1">newCoach = <a href="Coaches.java.html">Coaches</a>.newCoach(fName</span><span class="s0">,</span><span class="s1">lName</span><span class="s0">,</span><span class="s1">dateOfBirth</span><span class="s0">,</span><span class="s1">roll)</span><span class="s0">;</span>
+        <span class="s1">team.addNewCoach(newCoach)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(fName + </span><span class="s2">&quot; &quot; </span><span class="s1">+ lName + </span><span class="s2">&quot; has been added as a &quot; </span><span class="s1">+ roll)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updateCoach(){</span>
+
+        <span class="s0">boolean </span><span class="s1">quit = </span><span class="s0">false;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">Available actions:</span><span class="s0">\n</span><span class="s2">press&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;0 - to go back to main menu</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;1 - to update coach's first name</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;2 - to update coach's last name</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">+</span>
+                <span class="s2">&quot;3 - to update coach's roll</span><span class="s0">\n</span><span class="s2">&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Choose you action: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s0">while </span><span class="s1">(!quit) {</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">Update Player Menu Enter action: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">int </span><span class="s1">action = scanner.nextInt()</span><span class="s0">;</span>
+            <span class="s1">scanner.nextLine()</span><span class="s0">;</span>
+
+            <span class="s0">switch </span><span class="s1">((action)){</span>
+
+                <span class="s0">case </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">menu()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">1</span><span class="s1">:</span>
+                    <span class="s1">updateCoachFirstName()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">2</span><span class="s1">:</span>
+                    <span class="s1">updateCoachLastName()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+                <span class="s0">case </span><span class="s3">3</span><span class="s1">:</span>
+                    <span class="s1">updateCoachRoll()</span><span class="s0">;</span>
+                    <span class="s1">quit = </span><span class="s0">true;</span>
+                    <span class="s0">break;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updateCoachFirstName(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter coach's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Coaches.java.html">Coaches</a> <span class="s1">existingCoachRecord =team.queryCoachID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingCoachRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Coach not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter coach's New first name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newName = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updateCoachFname(existingCoachRecord</span><span class="s0">, </span><span class="s1">newName)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updateCoachLastName(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter Coach's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Coaches.java.html">Coaches</a> <span class="s1">existingCoachRecord =team.queryCoachID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingCoachRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Coach not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter coach's New Last name: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newName = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updateCoachLname(existingCoachRecord</span><span class="s0">, </span><span class="s1">newName)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private static void </span><span class="s1">updateCoachRoll(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter coach's ID: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String id = scanner.nextLine()</span><span class="s0">;</span>
+        <a href="Coaches.java.html">Coaches</a> <span class="s1">existingCoachRecord =team.queryCoachID(id)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">( existingCoachRecord == </span><span class="s0">null</span><span class="s1">){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Coach not found&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter coach's New roll: &quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String newName = scanner.nextLine()</span><span class="s0">;</span>
+
+
+        <span class="s0">if </span><span class="s1">(team.updateCoachRoll(existingCoachRecord</span><span class="s0">, </span><span class="s1">newName)){</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Successfully updated record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error updating Record&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+</pre>
+</body>
+</html>
